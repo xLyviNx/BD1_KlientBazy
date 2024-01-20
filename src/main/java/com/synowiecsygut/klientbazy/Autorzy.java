@@ -1,6 +1,7 @@
 package com.synowiecsygut.klientbazy;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 
 public class Autorzy
@@ -40,6 +41,6 @@ public class Autorzy
     @FXML
     void wroc()
     {
-        System.out.println("chuju");
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("StronaGlowna.fxml"));
     }
 }
