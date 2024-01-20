@@ -1,16 +1,26 @@
 package com.synowiecsygut.klientbazy;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.sql.CallableStatement;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Pracownicy
@@ -25,6 +35,25 @@ public class Pracownicy
     TextField input_wyna;
     @FXML
     TextField input_stano;
+    @FXML
+    private VBox pracparent;
+    @FXML
+    private VBox pracownicyMain;
+    @FXML
+    private CheckBox checkBoxId;
+    @FXML
+    private CheckBox checkBoxImie;
+    @FXML
+    private CheckBox checkBoxNazwisko;
+    @FXML
+    private CheckBox checkBoxWynagrodzenie;
+    @FXML
+    private CheckBox checkBoxStanowisko;
+    @FXML
+    public void initialize()
+    {
+        pracownicyMain.setVisible(false);
+    }
     @FXML
     void dodaj() {
         String naz = input_naz.getText();
@@ -141,10 +170,127 @@ public class Pracownicy
             Utilities.showAlert("Błąd", "ID pracownika musi być liczbą całkowitą!", Alert.AlertType.ERROR);
         }
     }
-
     @FXML
-    void wys()
+    void wys() {
+        pracownicyMain.setVisible(true);
+        pracparent.getChildren().clear();
+        pracparent.getChildren().add(createTemplateHBox(new Pracownik(0, "Imię", "Nazwisko", 0, "Stanowisko")));
+
+        try (DatabaseConnection db = new DatabaseConnection()) {
+            List<Pracownik> pracownicy = fetchPracownicyFromDatabase(db);
+
+            for (Pracownik pracownik : pracownicy) {
+                HBox templateHBox = createTemplateHBox(pracownik);
+                pracparent.getChildren().add(templateHBox);
+            }
+
+        } catch (SQLException e) {
+            Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
+            System.err.println(e.getLocalizedMessage());
+        }
+    }
+
+    private HBox createTemplateHBox(Pracownik pracownik) {
+        HBox templateHBox = new HBox(5);
+
+        if (checkBoxId.isSelected()) {
+            if (pracownik.getId()>0) {
+                templateHBox.getChildren().add(createLabel(String.valueOf(pracownik.getId())));
+            }else{
+                templateHBox.getChildren().add(createLabel("ID"));
+            }
+        }
+        if (checkBoxImie.isSelected()) {
+            templateHBox.getChildren().add(createLabel(pracownik.getImie()));
+        }
+        if (checkBoxNazwisko.isSelected()) {
+            templateHBox.getChildren().add(createLabel(pracownik.getNazwisko()));
+        }
+        if (checkBoxWynagrodzenie.isSelected()) {
+            if (pracownik.getId()>0) {
+                DecimalFormat decimalFormat = new DecimalFormat("#,###,##0.00 zł");
+                String formattedWynagrodzenie = decimalFormat.format(pracownik.getWynagrodzenie());
+
+                templateHBox.getChildren().add(createLabel(formattedWynagrodzenie));
+            }else{
+                templateHBox.getChildren().add(createLabel("Wynagrodzenie"));
+            }
+        }
+        if (checkBoxStanowisko.isSelected()) {
+            templateHBox.getChildren().add(createLabel(pracownik.getStanowisko()));
+        }
+
+        if (pracownik.getId() < 1) {
+            templateHBox.setStyle("-fx-background-color: rgba(0,0,0,0.8)");
+        } else {
+            templateHBox.setOnMouseClicked(event -> {
+                input_id.setText(String.valueOf(pracownik.getId()));
+                close();
+            });
+            templateHBox.setOnMouseEntered(event -> {
+                templateHBox.setStyle("-fx-background-color: rgba(255,255,255,0.3)");
+            });
+            templateHBox.setOnMouseExited(event -> {
+                templateHBox.setStyle("");
+            });
+        }
+
+        return templateHBox;
+    }
+    private List<Pracownik> fetchPracownicyFromDatabase(DatabaseConnection db) throws SQLException {
+        List<Pracownik> pracownicy = new ArrayList<>();
+
+        StringBuilder queryBuilder = getStringBuilder();
+
+        try (Statement statement = db.getConnection().createStatement();
+             ResultSet resultSet = statement.executeQuery(queryBuilder.toString())) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_pracownik");
+                String imie = checkBoxImie.isSelected() ? resultSet.getString("imie") : "";
+                String nazwisko = checkBoxNazwisko.isSelected() ? resultSet.getString("nazwisko") : "";
+                float wynagrodzenie = checkBoxWynagrodzenie.isSelected() ? resultSet.getFloat("wynagrodzenie") : 0;
+                String stanowisko = checkBoxStanowisko.isSelected() ? resultSet.getString("stanowisko") : "";
+
+                Pracownik pracownik = new Pracownik(id, imie, nazwisko, wynagrodzenie, stanowisko);
+                pracownicy.add(pracownik);
+            }
+        }
+
+        return pracownicy;
+    }
+    private StringBuilder getStringBuilder() {
+        StringBuilder queryBuilder = new StringBuilder("SELECT id_pracownik");
+
+        if (checkBoxImie.isSelected()) {
+            queryBuilder.append(", imie");
+        }
+        if (checkBoxNazwisko.isSelected()) {
+            queryBuilder.append(", nazwisko");
+        }
+        if (checkBoxWynagrodzenie.isSelected()) {
+            queryBuilder.append(", wynagrodzenie");
+        }
+        if (checkBoxStanowisko.isSelected()) {
+            queryBuilder.append(", stanowisko");
+        }
+
+        queryBuilder.append(" FROM pracownicy ORDER BY id_pracownik");
+        return queryBuilder;
+    }
+    @FXML
+    public void close()
     {
+        pracownicyMain.setVisible(false);
+    }
+    private static Label createLabel(String text) {
+        Label label = new Label(text);
+        label.setFont(new Font(26.0));
+        label.setPrefHeight(40.0);
+        label.setPrefWidth(1269.0);
+        label.setAlignment(javafx.geometry.Pos.CENTER);
+
+        return label;
     }
     @FXML
     void wroc()
@@ -157,5 +303,9 @@ public class Pracownicy
             throw new RuntimeException(e);
         }
         MainWindow.mainStage.setScene(scene);
+    }
+    @FXML
+    public void refresh(){
+        wys();
     }
 }
