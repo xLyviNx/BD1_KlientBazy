@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.synowiecsygut.klientbazy.prac_edy">
+   <children>
+      <Button layoutX="307.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
+      <TextField fx:id="input_naz" layoutX="562.0" layoutY="252.0" />
+      <TextField fx:id="input_imie" layoutX="562.0" layoutY="290.0" />
+      <TextField fx:id="input_wyna" layoutX="562.0" layoutY="330.0" />
+      <TextField fx:id="input_stano" layoutX="562.0" layoutY="372.0" />
+      <Label layoutX="473.0" layoutY="249.0" prefHeight="25.0" prefWidth="89.0" text="Nazwisko:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="518.0" layoutY="288.0" prefHeight="30.0" prefWidth="45.0" text="Imie:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="414.0" layoutY="328.0" prefHeight="30.0" prefWidth="149.0" text="Wynagrodzenie:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="454.0" layoutY="370.0" prefHeight="30.0" prefWidth="109.0" text="Stanowisko:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="input_id" layoutX="562.0" layoutY="218.0" />
+      <Label layoutX="536.0" layoutY="216.0" prefHeight="30.0" prefWidth="26.0" text="Id:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="485.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#usun" prefHeight="25.0" prefWidth="135.0" text="Usuń" />
+      <Button layoutX="661.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
+      <Button layoutX="838.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
+      <Label layoutX="307.0" layoutY="33.0" text="Edytowanie pracowników">
+         <font>
+            <Font size="59.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
