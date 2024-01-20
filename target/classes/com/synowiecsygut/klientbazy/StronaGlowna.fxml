@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.synowiecsygut.klientbazy.StronaGlowna">
+   <children>
+      <Label layoutX="419.0" layoutY="28.0" text="Strona główna">
+         <font>
+            <Font size="69.0" />
+         </font>
+      </Label>
+      <Label layoutX="480.0" layoutY="204.0" text="Wybierz co chcesz edytować">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="469.0" layoutY="291.0" text="1.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="469.0" layoutY="319.0" text="2.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="469.0" layoutY="347.0" text="3.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="469.0" layoutY="375.0" text="4.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="469.0" layoutY="403.0" text="5.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="469.0" layoutY="431.0" text="6.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="469.0" layoutY="459.0" text="7.">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="291.0" onMouseClicked="#prac" prefHeight="28.0" prefWidth="168.0" text="Pracownicy">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="319.0" onMouseClicked="#aut" prefHeight="28.0" prefWidth="168.0" text="Autorzy">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="347.0" onMouseClicked="#czyt" prefHeight="28.0" prefWidth="168.0" text="Czytelnicy">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="375.0" onMouseClicked="#egze" prefHeight="28.0" prefWidth="168.0" text="Egzemplarze">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="403.0" onMouseClicked="#ksi" prefHeight="28.0" prefWidth="168.0" text="Książki">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="431.0" onMouseClicked="#wyd" prefHeight="28.0" prefWidth="168.0" text="Wydawnictwa">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="459.0" onMouseClicked="#wyp" prefHeight="28.0" prefWidth="168.0" text="Wypożyczenia">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
