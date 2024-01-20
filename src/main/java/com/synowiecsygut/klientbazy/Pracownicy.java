@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.sql.Types;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -39,16 +41,20 @@ public class Pracownicy
             float wynagrodzenie = Float.parseFloat(wynagrodzenieStr);
             try (DatabaseConnection db = new DatabaseConnection())
             {
-                CallableStatement callableStatement = db.getConnection().prepareCall("{call DodajPracownika(?, ?, ?, ?)}");
+                CallableStatement callableStatement = db.getConnection().prepareCall("{call DodajPracownika(?, ?, ?, ?, ?)}");
                 callableStatement.setString(1, naz);
                 callableStatement.setString(2, imie);
                 callableStatement.setFloat(3, wynagrodzenie);
                 callableStatement.setString(4, stanowisko);
-
+                callableStatement.registerOutParameter(5, Types.NUMERIC);
                 callableStatement.execute();
-                int rowCount = callableStatement.getUpdateCount();
-                if (rowCount > 0) {
+                int successFlag = callableStatement.getInt(5);
+                if (successFlag == 1) {
                     Utilities.showAlert("Informacja", "Dodano pracownika.", Alert.AlertType.INFORMATION);
+                    input_naz.clear();
+                    input_imie.clear();
+                    input_wyna.clear();
+                    input_stano.clear();
                 } else {
                     Utilities.showAlert("Błąd!", "Nie udało się dodać pracownika.", Alert.AlertType.ERROR);
                 }
@@ -63,11 +69,77 @@ public class Pracownicy
     @FXML
     void usun()
     {
+        String idStr = input_id.getText();
+
+        if (idStr.isEmpty()) {
+            Utilities.showAlert("Błąd", "ID pracownika musi być podane!", Alert.AlertType.ERROR);
+            return;
+        }
+
+        try {
+            int id = Integer.parseInt(idStr);
+            try (DatabaseConnection db = new DatabaseConnection()) {
+                CallableStatement callableStatement = db.getConnection().prepareCall("{call UsunPracownika(?, ?)}");
+                callableStatement.setInt(1, id);
+                callableStatement.registerOutParameter(2, Types.NUMERIC);
+                callableStatement.execute();
+
+                int successFlag = callableStatement.getInt(2);
+
+                if (successFlag == 1) {
+                    Utilities.showAlert("Informacja", "Usunięto pracownika.", Alert.AlertType.INFORMATION);
+                } else {
+                    Utilities.showAlert("Błąd!", "Nie udało się usunąć pracownika.", Alert.AlertType.ERROR);
+                }
+            } catch (SQLException e) {
+                Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
+                System.err.println(e.getLocalizedMessage());
+            }
+        } catch (NumberFormatException e) {
+            Utilities.showAlert("Błąd", "ID pracownika musi być liczbą całkowitą!", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
-    void edytuj()
-    {
+    void edytuj() {
+        String idStr = input_id.getText();
+        String naz = input_naz.getText();
+        String imie = input_imie.getText();
+        String wynagrodzenieStr = input_wyna.getText();
+        String stanowisko = input_stano.getText();
+
+        if (idStr.isEmpty()) {
+            Utilities.showAlert("Błąd", "ID pracownika musi być podane!", Alert.AlertType.ERROR);
+            return;
+        }
+        try {
+            int id = Integer.parseInt(idStr);
+            float wynagrodzenie = (wynagrodzenieStr.isEmpty()) ? -1 : Float.parseFloat(wynagrodzenieStr);
+
+            try (DatabaseConnection db = new DatabaseConnection()) {
+                CallableStatement callableStatement = db.getConnection().prepareCall("{call EdytujPracownika(?, ?, ?, ?, ?, ?)}");
+                callableStatement.setInt(1, id);
+                callableStatement.setString(2, naz);
+                callableStatement.setString(3, imie);
+                callableStatement.setFloat(4, wynagrodzenie);
+                callableStatement.setString(5, stanowisko);
+                callableStatement.registerOutParameter(6, Types.NUMERIC);
+                callableStatement.execute();
+
+                int successFlag = callableStatement.getInt(6);
+
+                if (successFlag == 1) {
+                    Utilities.showAlert("Informacja", "Zaktualizowano pracownika.", Alert.AlertType.INFORMATION);
+                } else {
+                    Utilities.showAlert("Błąd!", "Nie udało się zaktualizować pracownika.", Alert.AlertType.ERROR);
+                }
+            } catch (SQLException e) {
+                Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
+                System.err.println(e.getLocalizedMessage());
+            }
+        } catch (NumberFormatException e) {
+            Utilities.showAlert("Błąd", "ID pracownika musi być liczbą całkowitą!", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
