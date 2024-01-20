@@ -10,7 +10,7 @@ public class DatabaseConnection implements AutoCloseable {
     private static final int DB_PORT = 1522;
     private static final String DB_NAME = "xe";
     private static final String USERNAME = "c##klientbaza";
-    private static final String PASSWORD = "password";
+    private static final String PASSWORD = "baza";
 
     private Connection connection;
 
