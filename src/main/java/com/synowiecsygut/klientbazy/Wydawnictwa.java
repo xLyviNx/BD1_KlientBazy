@@ -324,7 +324,7 @@ public class Wydawnictwa {
 
     public void wypozyczZapisz(MouseEvent mouseEvent)
     {
-        Ksiazki.zapisWydawnictwo=input_id.getText();
+        Ksiazki.zapisaneWydId=input_id.getText();
     }
 }
 

@@ -3,10 +3,12 @@ package com.synowiecsygut.klientbazy;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Wypozyczenia
 {
@@ -19,7 +21,7 @@ public class Wypozyczenia
     @FXML
     TextField input_idpracwyp;
     @FXML
-    TextField input_dataodd;
+    DatePicker wypoData;
     @FXML
     TextField input_idpraczwr;
     @FXML
@@ -76,5 +78,10 @@ public class Wypozyczenia
         pracZwrot = "";
         czytZapis = "";
         egzZapis = "";
+    }
+
+    public void dataDzis(MouseEvent mouseEvent)
+    {
+        wypoData.setValue(LocalDate.now());
     }
 }
