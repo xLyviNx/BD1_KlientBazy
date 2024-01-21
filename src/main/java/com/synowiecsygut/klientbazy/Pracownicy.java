@@ -278,11 +278,7 @@ public class Pracownicy
         queryBuilder.append(" FROM pracownicy ORDER BY id_pracownik");
         return queryBuilder;
     }
-    @FXML
-    public void close()
-    {
-        pracownicyMain.setVisible(false);
-    }
+
     private static Label createLabel(String text) {
         Label label = new Label(text);
         label.setFont(new Font(26.0));
@@ -291,6 +287,11 @@ public class Pracownicy
         label.setAlignment(javafx.geometry.Pos.CENTER);
 
         return label;
+    }
+    @FXML
+    public void close()
+    {
+        pracownicyMain.setVisible(false);
     }
     @FXML
     void wroc()
