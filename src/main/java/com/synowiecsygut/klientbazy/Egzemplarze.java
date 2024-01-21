@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -19,29 +20,26 @@ public class Egzemplarze
     TextField input_rokwyd;
     @FXML
     TextField input_stan;
+    public static String zapisKsiazka = "";
 
     @FXML
     void dodaj()
     {
-        System.out.println("Gruby");
     }
 
     @FXML
     void usun()
     {
-        System.out.println("ty");
     }
 
     @FXML
     void edytuj()
     {
-        System.out.println("jebany");
     }
 
     @FXML
     void wys()
     {
-        System.out.println("zaklamany");
     }
 
     @FXML
@@ -55,6 +53,11 @@ public class Egzemplarze
             throw new RuntimeException(e);
         }
         MainWindow.mainStage.setScene(scene);
+    }
+
+    public void wypozyczZapisz(MouseEvent mouseEvent)
+    {
+        Wypozyczenia.egzZapis=input_id.getText();
     }
 }
 

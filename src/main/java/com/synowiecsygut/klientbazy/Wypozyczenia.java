@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -24,29 +25,36 @@ public class Wypozyczenia
     @FXML
     TextField input_datazwr;
 
-
+    public static String pracWypo = "";
+    public static String pracZwrot = "";
+    public static String czytZapis = "";
+    public static String egzZapis = "";
+    @FXML
+    void initialize()
+    {
+        input_idpracwyp.setText(pracWypo);
+        input_idpraczwr.setText(pracZwrot);
+        input_idczyt.setText(czytZapis);
+        input_idegze.setText(egzZapis);
+    }
     @FXML
     void dodaj()
     {
-        System.out.println("Gruby");
     }
 
     @FXML
     void usun()
     {
-        System.out.println("ty");
     }
 
     @FXML
     void edytuj()
     {
-        System.out.println("jebany");
     }
 
     @FXML
     void wys()
     {
-        System.out.println("zaklamany");
     }
 
     @FXML
@@ -60,5 +68,13 @@ public class Wypozyczenia
             throw new RuntimeException(e);
         }
         MainWindow.mainStage.setScene(scene);
+    }
+
+    public void wyczyscZapis(MouseEvent mouseEvent)
+    {
+        pracWypo = "";
+        pracZwrot = "";
+        czytZapis = "";
+        egzZapis = "";
     }
 }

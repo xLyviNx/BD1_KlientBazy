@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.synowiecsygut.klientbazy.Egzemplarze">
    <children>
       <Button layoutX="317.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
@@ -49,5 +48,6 @@
          </font>
       </Label>
       <Button layoutX="822.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="135.0" text="Wyświetl" />
+      <Button layoutX="482.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="337.0" text="Zapisz wybrany egzemplarz do wypożyczenia" />
    </children>
 </AnchorPane>

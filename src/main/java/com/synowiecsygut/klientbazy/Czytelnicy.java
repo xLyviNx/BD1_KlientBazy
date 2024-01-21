@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -355,5 +356,10 @@ public class Czytelnicy
     @FXML
     public void refresh() {
         wys();
+    }
+
+    public void wypozyczZapisz(MouseEvent mouseEvent)
+    {
+        Wypozyczenia.czytZapis=input_id.getText();
     }
 }

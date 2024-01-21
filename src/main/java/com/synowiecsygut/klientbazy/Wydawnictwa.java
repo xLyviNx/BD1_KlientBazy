@@ -11,6 +11,7 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -319,6 +320,11 @@ public class Wydawnictwa {
     public void close()
     {
         wydawnictwaMain.setVisible(false);
+    }
+
+    public void wypozyczZapisz(MouseEvent mouseEvent)
+    {
+        Ksiazki.zapisWydawnictwo=input_id.getText();
     }
 }
 

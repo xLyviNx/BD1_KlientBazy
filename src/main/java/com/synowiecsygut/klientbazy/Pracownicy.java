@@ -18,6 +18,7 @@ import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -308,5 +309,15 @@ public class Pracownicy
     @FXML
     public void refresh(){
         wys();
+    }
+
+    public void wypozyczZapisz(MouseEvent mouseEvent)
+    {
+        Wypozyczenia.pracWypo=input_id.getText();
+    }
+
+    public void zwrotZapisz(MouseEvent mouseEvent)
+    {
+        Wypozyczenia.pracZwrot = input_id.getText();
     }
 }
