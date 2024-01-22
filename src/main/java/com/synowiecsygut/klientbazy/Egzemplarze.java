@@ -53,6 +53,23 @@ public class Egzemplarze {
     @FXML
     private CheckBox checkBoxDostepne;
 
+    @FXML
+    TableView statsTable;
+    @FXML
+    VBox statsMain;
+
+    @FXML
+    TableColumn<StatystykiEgzemplarzy, Integer> columnStatId;
+    @FXML
+    TableColumn<StatystykiEgzemplarzy, String> columnStatTytul;
+    @FXML
+    TableColumn<StatystykiEgzemplarzy, Integer> columnStatAmount;
+    @FXML
+    TableColumn<StatystykiEgzemplarzy, Integer> columnStatDostepne;
+    @FXML
+    TableColumn<StatystykiEgzemplarzy, Integer> columnStatTotal;
+    @FXML
+    Label statSummary;
 
     @FXML
     void initialize() {
@@ -150,9 +167,9 @@ public class Egzemplarze {
 
         try {
             int id = Integer.parseInt(idStr);
-            int stan = stanStr.isEmpty()? -1 : Integer.parseInt(stanStr);
-            int idKsiazki = idKsiazkiStr.isEmpty()?-1: Integer.parseInt(idKsiazkiStr);
-            int rokWydania = rokWydaniaStr.isEmpty()?-1: rokWydaniaStr.isEmpty() ? 0 : Integer.parseInt(rokWydaniaStr);
+            int stan = stanStr.isEmpty() ? -1 : Integer.parseInt(stanStr);
+            int idKsiazki = idKsiazkiStr.isEmpty() ? -1 : Integer.parseInt(idKsiazkiStr);
+            int rokWydania = rokWydaniaStr.isEmpty() ? -1 : rokWydaniaStr.isEmpty() ? 0 : Integer.parseInt(rokWydaniaStr);
 
             try (DatabaseConnection db = new DatabaseConnection()) {
                 CallableStatement callableStatement = db.getConnection().prepareCall("{call EdytujEgzemplarz(?, ?, ?, ?, ?)}");
@@ -283,6 +300,7 @@ public class Egzemplarze {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleTableRowClick(MouseEvent event) {
         if (event.getClickCount() == 1) {
@@ -295,9 +313,48 @@ public class Egzemplarze {
     }
 
     @FXML
-    private void close()
-    {
+    private void close() {
         egzemplarzeMain.setVisible(false);
+        statsMain.setVisible(false);
     }
+    @FXML
+    public void wyswietlStaty() {
+        statsMain.setVisible(true);
+        try (DatabaseConnection db = new DatabaseConnection()) {
+            Statement statement = db.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM WIDOK_STATYSTYKI_EGZEMPLARZY");
 
+            List<StatystykiEgzemplarzy> statystkilist = new ArrayList<>();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_ksiazka");
+                String tytul = resultSet.getString("Tytul");
+                int iloscwyp = resultSet.getInt("ilosc_wypozyczonych");
+                int iloscwolnych = resultSet.getInt("ILOSC_WOLNYCH");
+                int ilosc = iloscwyp+iloscwolnych;
+                statystkilist.add(new StatystykiEgzemplarzy(id, tytul, iloscwyp, iloscwolnych, ilosc));
+            }
+
+            resultSet.close();
+            columnStatId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdKsiazka()).asObject());
+            columnStatTytul.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTytul()));
+            columnStatAmount.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIloscWypozyczonych()).asObject());
+            columnStatDostepne.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIloscWolnych()).asObject());
+            columnStatTotal.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIloscWolnych()).asObject());
+
+            statsTable.getItems().setAll(statystkilist);
+            resultSet = statement.executeQuery("SELECT * FROM WIDOK_STATYSTYKI_SUMMARY");
+
+            while (resultSet.next()) {
+                int iloscwyp = resultSet.getInt("SUM_ILOSC_WYPOZYCZONYCH");
+                int iloscwolnych = resultSet.getInt("SUM_ILOSC_WOLNYCH");
+                float procentwolnych = resultSet.getFloat("PROCENT_WOLNYCH");
+
+                statSummary.setText("Łącznie jest " + iloscwyp + iloscwolnych + " książek.\n" + iloscwyp + " jest wypożyczonych, " + iloscwolnych + " wolnych co stanowi " + procentwolnych + "% egzemplarzy w bibliotece.");
+            }
+        } catch (SQLException e) {
+            Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
 }

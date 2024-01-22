@@ -50,6 +50,7 @@
       <Button layoutX="822.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="135.0" text="Wyświetl" />
       <Button layoutX="482.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="337.0" text="Zapisz wybrany egzemplarz do wypożyczenia" />
       <Button layoutX="482.0" layoutY="635.0" mnemonicParsing="false" onMouseClicked="#czyscZapis" prefHeight="25.0" prefWidth="337.0" text="Wyczysc zapisane ID ksiazki" />
+      <Button layoutX="482.0" layoutY="682.0" mnemonicParsing="false" onMouseClicked="#wyswietlStaty" prefHeight="25.0" prefWidth="337.0" text="Wyświetl stan egzemplarzy" />
 
       <VBox fx:id="egzemplarzeMain" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: rgba(10,15,25,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -114,6 +115,49 @@
                </content>
             </ScrollPane>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="1280.0" VBox.vgrow="SOMETIMES">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="50.0" prefWidth="118.0" text="Zamknij" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="statsMain" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: rgba(10,15,25,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="819.0" text="Lista egzemplarzy" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Label>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="611.0" prefWidth="1259.0" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox VBox.vgrow="ALWAYS">
+                     <children>
+                        <TableView fx:id="statsTable" maxHeight="9999.0" maxWidth="1597.0" minHeight="611.0" minWidth="1259.0" prefHeight="611.0" prefWidth="1597.0" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="columnStatId" editable="false" text="ID Książki" />
+                              <TableColumn fx:id="columnStatTytul" editable="false" text="Tytuł" />
+                              <TableColumn fx:id="columnStatTotal" editable="false" text="Egzemplarzy" />
+                              <TableColumn fx:id="columnStatAmount" editable="false" text="Ilość wypożyczonych" />
+                              <TableColumn fx:id="columnStatDostepne" editable="false" text="Wolnych" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="1280.0" VBox.vgrow="SOMETIMES">
+               <children>
+                  <Label fx:id="statSummary" alignment="CENTER" contentDisplay="CENTER" text="Wolnych: X" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="730.0" prefHeight="80.0" prefWidth="1280.0">
                <children>
                   <Button mnemonicParsing="false" onMouseClicked="#close" prefHeight="50.0" prefWidth="118.0" text="Zamknij" />
                </children>

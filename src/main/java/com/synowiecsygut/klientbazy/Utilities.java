@@ -16,8 +16,8 @@ public class Utilities
     }
     public static Label createLabel(String text) {
         Label label = new Label(text);
-        label.setFont(new Font(26.0));
-        label.setPrefHeight(40.0);
+        label.setFont(new Font(18.0));
+        label.setPrefHeight(30.0);
         label.setPrefWidth(1269.0);
         label.setAlignment(Pos.CENTER);
         return label;

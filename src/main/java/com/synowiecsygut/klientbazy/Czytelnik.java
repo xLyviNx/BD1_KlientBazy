@@ -9,8 +9,9 @@ public class Czytelnik {
     private String nrLokalu;
     private String kodPocztowy;
     private float kara;
+    private int iloscKsiazek;
 
-    public Czytelnik(int id, String imie, String nazwisko, String ulica, String nrDomu, String nrLokalu, String kodPocztowy, float kara) {
+    public Czytelnik(int id, String imie, String nazwisko, String ulica, String nrDomu, String nrLokalu, String kodPocztowy, float kara, int ksiazki) {
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -19,6 +20,7 @@ public class Czytelnik {
         this.nrLokalu = nrLokalu;
         this.kodPocztowy = kodPocztowy;
         this.kara = kara;
+        this.iloscKsiazek=ksiazki;
     }
 
     public int getId() {
@@ -51,5 +53,13 @@ public class Czytelnik {
 
     public float getKara() {
         return kara;
+    }
+
+    public int getIloscKsiazek() {
+        return iloscKsiazek;
+    }
+
+    public void setIloscKsiazek(int iloscKsiazek) {
+        this.iloscKsiazek = iloscKsiazek;
     }
 }

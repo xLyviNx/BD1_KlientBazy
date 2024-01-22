@@ -3,9 +3,8 @@ package com.synowiecsygut.klientbazy;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -54,7 +53,30 @@ public class Czytelnicy
     private CheckBox checkBoxKodPocztowy;
     @FXML
     private CheckBox checkBoxKara;
-
+    @FXML
+    private CheckBox checkBoxWypo;
+    @FXML
+    private TableView<Czytelnik> czytelnicyTable;
+    @FXML
+    private TableColumn<Czytelnik, Integer> columnId;
+    @FXML
+    private TableColumn<Czytelnik, String> columnImie;
+    @FXML
+    private TableColumn<Czytelnik, String> columnNazwisko;
+    @FXML
+    private TableColumn<Czytelnik, String> columnUlica;
+    @FXML
+    private TableColumn<Czytelnik, String> columnNrDomu;
+    @FXML
+    private TableColumn<Czytelnik, String> columnNrLokalu;
+    @FXML
+    private TableColumn<Czytelnik, String> columnKodPocztowy;
+    @FXML
+    private TableColumn<Czytelnik, Float> columnKara;
+    @FXML
+    private TableColumn<Czytelnik, Integer> columnWypo;
+    @FXML
+    private Label kara;
     @FXML
     public void initialize() {
         czytelnicyMain.setVisible(false);
@@ -66,7 +88,46 @@ public class Czytelnicy
         checkBoxNrLokalu.setSelected(true);
         checkBoxKodPocztowy.setSelected(true);
         checkBoxKara.setSelected(true);
+        initializeTable();
+        try (DatabaseConnection dbc = new DatabaseConnection()) {
+            try (CallableStatement callableStatement = dbc.getConnection().prepareCall("{ ? = call oblicz_sume_kar }")) {
+                callableStatement.registerOutParameter(1, Types.NUMERIC);
+                callableStatement.execute();
+                float sumakar = callableStatement.getFloat(1);
+                kara.setText("Suma kar: " + sumakar);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    private void initializeTable() {
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnImie.setCellValueFactory(new PropertyValueFactory<>("imie"));
+        columnNazwisko.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+        columnUlica.setCellValueFactory(new PropertyValueFactory<>("ulica"));
+        columnNrDomu.setCellValueFactory(new PropertyValueFactory<>("nrDomu"));
+        columnNrLokalu.setCellValueFactory(new PropertyValueFactory<>("nrLokalu"));
+        columnKodPocztowy.setCellValueFactory(new PropertyValueFactory<>("kodPocztowy"));
+        columnKara.setCellValueFactory(new PropertyValueFactory<>("kara"));
+        columnWypo.setCellValueFactory(new PropertyValueFactory<>("iloscKsiazek"));
+
+        czytelnicyTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                handleTableClick();
+            }
+        });
+    }
+
+    private void handleTableClick()
+    {
+        Czytelnik selectedCzytelnik = czytelnicyTable.getSelectionModel().getSelectedItem();
+        if (selectedCzytelnik != null) {
+            input_id.setText(String.valueOf(selectedCzytelnik.getId()));
+            close();
+        }
+    }
+
     @FXML
     void dodaj() {
         String naz = input_naz.getText();
@@ -105,7 +166,7 @@ public class Czytelnicy
                 }
             } catch (SQLException e) {
                 Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
-                System.err.println(e.getLocalizedMessage());
+                e.printStackTrace();
             }
         } catch (NumberFormatException e) {
             Utilities.showAlert("Błąd", "Kara musi być liczbą!", Alert.AlertType.ERROR);
@@ -149,7 +210,7 @@ public class Czytelnicy
                 }
             } catch (SQLException e) {
                 Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
-                System.err.println(e.getLocalizedMessage());
+                e.printStackTrace();
             }
         } catch (NumberFormatException e) {
             Utilities.showAlert("Błąd", "ID czytelnika musi być liczbą całkowitą!", Alert.AlertType.ERROR);
@@ -198,7 +259,7 @@ public class Czytelnicy
                 }
             } catch (SQLException e) {
                 Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
-                System.err.println(e.getLocalizedMessage());
+                e.printStackTrace();
             }
         } catch (NumberFormatException e) {
             Utilities.showAlert("Błąd", "ID czytelnika musi być liczbą całkowitą!", Alert.AlertType.ERROR);
@@ -206,79 +267,25 @@ public class Czytelnicy
     }
     @FXML
     void wys() {
-        czytelnicyMain.setVisible(true);
-        czytelnicyParent.getChildren().clear();
-        czytelnicyParent.getChildren().add(createTemplateHBox(new Czytelnik(0, "Imię", "Nazwisko", "Ulica", "Nr domu", "Nr lokalu", "Kod pocztowy", 0.0F)));
+        columnId.setVisible(checkBoxId.isSelected());
+        columnImie.setVisible(checkBoxImie.isSelected());
+        columnNazwisko.setVisible(checkBoxNazwisko.isSelected());
+        columnUlica.setVisible(checkBoxUlica.isSelected());
+        columnNrDomu.setVisible(checkBoxNrDomu.isSelected());
+        columnNrLokalu.setVisible(checkBoxNrLokalu.isSelected());
+        columnKodPocztowy.setVisible(checkBoxKodPocztowy.isSelected());
+        columnKara.setVisible(checkBoxKara.isSelected());
+        columnWypo.setVisible(checkBoxWypo.isSelected());
 
+        czytelnicyMain.setVisible(true);
         try (DatabaseConnection db = new DatabaseConnection()) {
             List<Czytelnik> czytelnicy = fetchCzytelnicyFromDatabase(db);
 
-            for (Czytelnik czytelnik : czytelnicy) {
-                HBox templateHBox = createTemplateHBox(czytelnik);
-                czytelnicyParent.getChildren().add(templateHBox);
-            }
-
+            czytelnicyTable.getItems().setAll(czytelnicy);
         } catch (SQLException e) {
             Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
-            System.err.println(e.getLocalizedMessage());
+            e.printStackTrace();
         }
-    }
-
-    private HBox createTemplateHBox(Czytelnik czytelnik) {
-        HBox templateHBox = new HBox(5);
-
-        if (checkBoxId.isSelected()) {
-            if (czytelnik.getId() > 0) {
-                templateHBox.getChildren().add(Utilities.createLabel(String.valueOf(czytelnik.getId())));
-            } else {
-                templateHBox.getChildren().add(Utilities.createLabel("ID"));
-            }
-        }
-        if (checkBoxImie.isSelected()) {
-            templateHBox.getChildren().add(Utilities.createLabel(czytelnik.getImie()));
-        }
-        if (checkBoxNazwisko.isSelected()) {
-            templateHBox.getChildren().add(Utilities.createLabel(czytelnik.getNazwisko()));
-        }
-        if (checkBoxUlica.isSelected()) {
-            templateHBox.getChildren().add(Utilities.createLabel(czytelnik.getUlica()));
-        }
-        if (checkBoxNrDomu.isSelected()) {
-            templateHBox.getChildren().add(Utilities.createLabel(czytelnik.getNrDomu()));
-        }
-        if (checkBoxNrLokalu.isSelected()) {
-            templateHBox.getChildren().add(Utilities.createLabel(czytelnik.getNrLokalu()));
-        }
-        if (checkBoxKodPocztowy.isSelected()) {
-            templateHBox.getChildren().add(Utilities.createLabel(czytelnik.getKodPocztowy()));
-        }
-        if (checkBoxKara.isSelected()) {
-            if (czytelnik.getId() > 0) {
-                DecimalFormat decimalFormat = new DecimalFormat("#,###,##0.00 zł");
-                String formattedKara = decimalFormat.format(czytelnik.getKara());
-
-                templateHBox.getChildren().add(Utilities.createLabel(formattedKara));
-            } else {
-                templateHBox.getChildren().add(Utilities.createLabel("Kara"));
-            }
-        }
-
-        if (czytelnik.getId() < 1) {
-            templateHBox.setStyle("-fx-background-color: rgba(0,0,0,0.8)");
-        } else {
-            templateHBox.setOnMouseClicked(event -> {
-                input_id.setText(String.valueOf(czytelnik.getId()));
-                close();
-            });
-            templateHBox.setOnMouseEntered(event -> {
-                templateHBox.setStyle("-fx-background-color: rgba(255,255,255,0.3)");
-            });
-            templateHBox.setOnMouseExited(event -> {
-                templateHBox.setStyle("");
-            });
-        }
-
-        return templateHBox;
     }
 
     private List<Czytelnik> fetchCzytelnicyFromDatabase(DatabaseConnection db) throws SQLException {
@@ -298,8 +305,8 @@ public class Czytelnicy
                 String nrLokalu = checkBoxNrLokalu.isSelected() ? resultSet.getString("nr_lokalu") : "";
                 String kodPocztowy = checkBoxKodPocztowy.isSelected() ? resultSet.getString("kod_pocztowy") : "";
                 float kara = checkBoxKara.isSelected() ? resultSet.getFloat("kara") : 0;
-
-                Czytelnik czytelnik = new Czytelnik(id, imie, nazwisko, ulica, nrDomu, nrLokalu, kodPocztowy, kara);
+                int wypo = checkBoxWypo.isSelected()? resultSet.getInt("WYPOZYCZEN") : 0;
+                Czytelnik czytelnik = new Czytelnik(id, imie, nazwisko, ulica, nrDomu, nrLokalu, kodPocztowy, kara, wypo);
                 czytelnicy.add(czytelnik);
             }
         }
@@ -331,8 +338,11 @@ public class Czytelnicy
         if (checkBoxKara.isSelected()) {
             queryBuilder.append(", kara");
         }
+        if (checkBoxWypo.isSelected()) {
+            queryBuilder.append(", WYPOZYCZEN");
+        }
 
-        queryBuilder.append(" FROM czytelnicy ORDER BY id_czytelnik");
+        queryBuilder.append(" FROM widok_czytelnicy");
         return queryBuilder;
     }
 
