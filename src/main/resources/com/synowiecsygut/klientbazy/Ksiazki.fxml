@@ -10,42 +10,101 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.synowiecsygut.klientbazy.Ksiazki">
    <children>
-      <Button layoutX="317.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
-      <TextField fx:id="input_tyt" layoutX="572.0" layoutY="262.0" />
-      <TextField fx:id="input_idwyd" layoutX="572.0" layoutY="300.0" />
-      <Label layoutX="520.0" layoutY="259.0" prefHeight="30.0" prefWidth="52.0" text="Tytuł:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="424.0" layoutY="298.0" prefHeight="30.0" prefWidth="149.0" text="Id wydawnictwa:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="input_id" layoutX="572.0" layoutY="228.0" />
-      <Label layoutX="546.0" layoutY="226.0" prefHeight="30.0" prefWidth="26.0" text="Id:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button layoutX="495.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#usun" prefHeight="25.0" prefWidth="135.0" text="Usuń" />
-      <Button layoutX="671.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
-      <Button layoutX="976.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
-      <Label layoutX="390.0" layoutY="41.0" text="Edytowanie książek">
-         <font>
-            <Font size="59.0" />
-         </font>
-      </Label>
-      <Button layoutX="822.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="135.0" text="Wyświetl" />
-      <Button layoutX="482.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="337.0" text="Zapisz wybraną książkę do dodania egzemplarza" />
-      <Button layoutX="482.0" layoutY="634.0" mnemonicParsing="false" onMouseClicked="#wyczyscWyd" prefHeight="25.0" prefWidth="337.0" text="Wyczyść zapisane ID wydawnictwa" />
+      <VBox alignment="CENTER" layoutX="317.0" layoutY="41.0" prefHeight="800.0" prefWidth="1280.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Edytowanie książek">
+               <font>
+                  <Font size="59.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="160.0" text="Id:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_id" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="160.0" text="Tytuł:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_tyt" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="160.0" text="Id wydawnictwa:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_idwyd" />
+               </children>
+            </HBox>
+            <FlowPane alignment="CENTER" hgap="10.0" minWidth="50.0" vgap="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
+                  <Button mnemonicParsing="false" onMouseClicked="#usun" prefHeight="25.0" prefWidth="135.0" text="Usuń" />
+                  <Button mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
+               </children>
+            </FlowPane>
+            <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="479.0" text="Wyświetl" />
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="337.0" text="Zapisz wybraną książkę do dodania egzemplarza" />
+                  <Button mnemonicParsing="false" onMouseClicked="#wyczyscWyd" prefHeight="25.0" prefWidth="337.0" text="Wyczyść zapisane ID wydawnictwa" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="ID nie jest używane do dodawania.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Puste pole przy edycji pozostaje niezmienione.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="543.0" layoutY="10.0" text="Do usunięcia potrzeba tylko ID.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="554.0" layoutY="60.0" text="By wybrać konkretną pozycję kliknij na nią przy wyświetlaniu.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="463.0" layoutY="85.0" text="Możesz zapisać książkę by później łatwiej dodać egzemplarz.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="444.0" layoutY="110.0" text="Możesz wyczyścić zapisane ID wydawnictwa.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
       <VBox fx:id="ksiazkiMain" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: rgba(10,15,25,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="CENTER" prefHeight="42.0" prefWidth="819.0" text="Lista książek" textAlignment="CENTER" textFill="WHITE">

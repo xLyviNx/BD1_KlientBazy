@@ -1,91 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.synowiecsygut.klientbazy.StronaGlowna">
    <children>
-      <Label layoutX="419.0" layoutY="28.0" text="Strona główna">
-         <font>
-            <Font size="69.0" />
-         </font>
-      </Label>
-      <Label layoutX="480.0" layoutY="204.0" text="Wybierz co chcesz edytować">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-      <Label layoutX="469.0" layoutY="291.0" text="1.">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="469.0" layoutY="319.0" text="2.">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="469.0" layoutY="347.0" text="3.">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="469.0" layoutY="375.0" text="4.">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="469.0" layoutY="403.0" text="5.">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="469.0" layoutY="431.0" text="6.">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="469.0" layoutY="459.0" text="7.">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="291.0" onMouseClicked="#prac" prefHeight="28.0" prefWidth="168.0" text="Pracownicy">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="319.0" onMouseClicked="#aut" prefHeight="28.0" prefWidth="168.0" text="Autorzy">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="347.0" onMouseClicked="#czyt" prefHeight="28.0" prefWidth="168.0" text="Czytelnicy">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="375.0" onMouseClicked="#egze" prefHeight="28.0" prefWidth="168.0" text="Egzemplarze">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="403.0" onMouseClicked="#ksi" prefHeight="28.0" prefWidth="168.0" text="Książki">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="431.0" onMouseClicked="#wyd" prefHeight="28.0" prefWidth="168.0" text="Wydawnictwa">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="459.0" onMouseClicked="#wyp" prefHeight="28.0" prefWidth="168.0" text="Wypożyczenia">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" layoutX="419.0" layoutY="28.0" prefHeight="800.0" prefWidth="1280.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Biblioteka">
+               <font>
+                  <Font size="69.0" />
+               </font>
+            </Label>
+            <Label text="Wybierz co chcesz edytować lub wyświetlić">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+            
+                  <!-- Przyciski zamiast labeli -->
+                  <Button onAction="#prac" prefHeight="28.0" prefWidth="168.0" text="Pracownicy">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button onAction="#aut" prefHeight="28.0" prefWidth="168.0" text="Autorzy">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button onAction="#czyt" prefHeight="28.0" prefWidth="168.0" text="Czytelnicy">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button onAction="#egze" prefHeight="28.0" prefWidth="168.0" text="Egzemplarze">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button onAction="#ksi" prefHeight="28.0" prefWidth="168.0" text="Książki">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button onAction="#wyd" prefHeight="28.0" prefWidth="168.0" text="Wydawnictwa">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button onAction="#wyp" prefHeight="28.0" prefWidth="168.0" text="Wypożyczenia">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <Label layoutX="376.0" layoutY="284.0" text="Sygut Grzegorz, Adrian Synowiec">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="439.0" layoutY="638.0" text="2ID14B">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

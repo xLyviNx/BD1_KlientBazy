@@ -7,64 +7,131 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.synowiecsygut.klientbazy.Wydawnictwa">
    <children>
-      <Button layoutX="307.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
-      <TextField fx:id="input_naz" layoutX="562.0" layoutY="252.0" />
-      <TextField fx:id="input_ulica" layoutX="562.0" layoutY="290.0" />
-      <TextField fx:id="input_nrdomu" layoutX="562.0" layoutY="330.0" />
-      <TextField fx:id="input_nrlokalu" layoutX="562.0" layoutY="372.0" />
-      <TextField fx:id="input_kodpoczt" layoutX="562.0" layoutY="414.0" />
-      <TextField fx:id="input_poczta" layoutX="562.0" layoutY="456.0" />
-      <Label layoutX="473.0" layoutY="249.0" prefHeight="25.0" prefWidth="89.0" text="Nazwa:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="518.0" layoutY="288.0" prefHeight="30.0" prefWidth="45.0" text="Ulica:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="454.0" layoutY="328.0" prefHeight="30.0" prefWidth="109.0" text="Nr domu:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="448.0" layoutY="370.0" prefHeight="30.0" prefWidth="115.0" text="Nr lokalu:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="430.0" layoutY="412.0" prefHeight="30.0" prefWidth="133.0" text="Kod pocztowy:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="484.0" layoutY="454.0" prefHeight="30.0" prefWidth="79.0" text="Poczta:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="input_id" layoutX="562.0" layoutY="218.0" />
-      <Label layoutX="536.0" layoutY="216.0" prefHeight="30.0" prefWidth="26.0" text="Id:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button layoutX="485.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#usun" prefHeight="25.0" prefWidth="135.0" text="Usuń" />
-      <Button layoutX="661.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
-      <Button layoutX="966.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
-      <Label layoutX="307.0" layoutY="33.0" text="Edytowanie wydawnictw">
-         <font>
-            <Font size="59.0" />
-         </font>
-      </Label>
-      <Button layoutX="812.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="135.0" text="Wyświetl" />
+      <VBox alignment="CENTER" layoutX="307.0" layoutY="33.0" prefHeight="800.0" prefWidth="1280.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Edytowanie wydawnictw">
+               <font>
+                  <Font size="59.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Id:" textAlignment="RIGHT">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_id" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="150.0" text="Nazwa:" textAlignment="RIGHT">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_naz" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Ulica:" textAlignment="RIGHT">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_ulica" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Nr domu:" textAlignment="RIGHT">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_nrdomu" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Nr lokalu:" textAlignment="RIGHT">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_nrlokalu" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Kod pocztowy:" textAlignment="RIGHT">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_kodpoczt" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0" text="Poczta:" textAlignment="RIGHT">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="input_poczta" />
+               </children>
+            </HBox>
+            <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
+                  <Button mnemonicParsing="false" onMouseClicked="#usun" prefHeight="25.0" prefWidth="135.0" text="Usuń" />
+                  <Button mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
+               </children>
+            </FlowPane>
+            <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="410.0" text="Wyświetl" />
+            <Button mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="337.0" text="Zapisz wybrane wydawnictwo do dodania książek" />
+            <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="ID nie jest używane do dodawania.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Puste pole przy edycji pozostaje niezmienione.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="543.0" layoutY="10.0" text="Do usunięcia potrzeba tylko ID.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="554.0" layoutY="60.0" text="By wybrać konkretną pozycję kliknij na nią przy wyświetlaniu.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="463.0" layoutY="85.0" text="Możesz zapisać wydawnictwo by później łatwiej dodać książkę.">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
       <VBox fx:id="wydawnictwaMain" alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: rgba(10,15,25,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="CENTER" prefHeight="42.0" prefWidth="819.0" text="Lista wydawnictw" textAlignment="CENTER" textFill="WHITE">
@@ -131,6 +198,5 @@
             </HBox>
          </children>
       </VBox>
-      <Button layoutX="492.0" layoutY="610.0" mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="337.0" text="Zapisz wybrane wydawnictwo do dodania książek" />
    </children>
 </AnchorPane>
