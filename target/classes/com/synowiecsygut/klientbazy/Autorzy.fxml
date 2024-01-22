@@ -62,7 +62,7 @@
                   <Button mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
                </children>
             </FlowPane>
-            <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="306.0" text="Wyświetl" />
+            <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="389.0" text="Wyświetl" />
             <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="304.0" text="Wróć" />
             <VBox alignment="CENTER" spacing="5.0">
                <children>

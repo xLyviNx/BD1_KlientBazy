@@ -67,13 +67,17 @@
                   <Button mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
                   <Button mnemonicParsing="false" onMouseClicked="#usun" prefHeight="25.0" prefWidth="135.0" text="Usuń" />
                   <Button mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
-                  <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
                </children>
             </FlowPane>
-            <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="403.0" text="Wyświetl" />
-            <Button mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="337.0" text="Zapisz wybrany egzemplarz do wypożyczenia" />
-            <Button mnemonicParsing="false" onMouseClicked="#wyswietlStaty" prefHeight="25.0" prefWidth="337.0" text="Wyświetl stan egzemplarzy" />
-            <Button mnemonicParsing="false" onMouseClicked="#czyscZapis" prefHeight="25.0" prefWidth="337.0" text="Wyczysc zapisane ID ksiazki" />
+            <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="516.0" text="Wyświetl" />
+            <FlowPane alignment="CENTER" hgap="10.0" minWidth="100.0" vgap="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#wypozyczZapisz" prefHeight="25.0" prefWidth="276.0" text="Zapisz wybrany egzemplarz do wypożyczenia" />
+                  <Button mnemonicParsing="false" onMouseClicked="#wyswietlStaty" prefHeight="25.0" prefWidth="225.0" text="Wyświetl stan egzemplarzy" />
+                  <Button mnemonicParsing="false" onMouseClicked="#czyscZapis" prefHeight="25.0" prefWidth="223.0" text="Wyczysc zapisane ID ksiazki" />
+               </children>
+            </FlowPane>
+            <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="214.0" text="Wróć" />
             <VBox alignment="CENTER" spacing="5.0">
                <children>
                   <Label text="ID nie jest używane do dodawania.">

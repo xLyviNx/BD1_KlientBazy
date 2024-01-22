@@ -125,6 +125,20 @@ public class Wypozyczenia
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        wypozyczeniaTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                handleTableClick();
+            }
+        });
+    }
+
+    private void handleTableClick()
+    {
+        Wypozyczenie selectedWypozyczenie = wypozyczeniaTable.getSelectionModel().getSelectedItem();
+        if (selectedWypozyczenie != null) {
+            input_id.setText(String.valueOf(selectedWypozyczenie.getIdWypozyczenia()));
+            close();
+        }
     }
 
     private void handleTableRowClick(MouseEvent mouseEvent)

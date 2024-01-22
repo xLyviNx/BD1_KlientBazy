@@ -101,11 +101,11 @@
                   <Button mnemonicParsing="false" onMouseClicked="#dodaj" prefHeight="25.0" prefWidth="135.0" text="Dodaj" />
                   <Button mnemonicParsing="false" onMouseClicked="#usun" prefHeight="25.0" prefWidth="135.0" text="Usuń" />
                   <Button mnemonicParsing="false" onMouseClicked="#edytuj" prefHeight="25.0" prefWidth="135.0" text="Edytuj" />
-                  <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
                </children>
             </FlowPane>
             <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="409.0" text="Wyświetl" />
             <Button mnemonicParsing="false" onMouseClicked="#wyczyscZapis" prefHeight="25.0" prefWidth="337.0" text="Wyczyść zapisane dane" />
+            <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="135.0" text="Wróć" />
             <VBox alignment="CENTER" spacing="5.0">
                <children>
                   <Label text="ID nie jest używane do dodawania.">

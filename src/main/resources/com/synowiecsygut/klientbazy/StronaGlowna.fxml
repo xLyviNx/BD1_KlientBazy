@@ -22,8 +22,6 @@
             </Label>
             <VBox alignment="CENTER" spacing="5.0">
                <children>
-            
-                  <!-- Przyciski zamiast labeli -->
                   <Button onAction="#prac" prefHeight="28.0" prefWidth="168.0" text="Pracownicy">
                      <font>
                         <Font size="19.0" />
