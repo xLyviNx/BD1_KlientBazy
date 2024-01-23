@@ -1,5 +1,6 @@
 package com.synowiecsygut.klientbazy;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -90,6 +91,18 @@ public class StronaGlowna
     void wyp()
     {
         FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("Wypozyczenia.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 1280, 800);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        MainWindow.mainStage.setScene(scene);
+    }
+
+    public void autorzyKsi(ActionEvent actionEvent)
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("AutorzyKsiazek.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 1280, 800);

@@ -1,6 +1,7 @@
 package com.synowiecsygut.klientbazy;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,7 +19,17 @@ public class MainWindow extends Application {
         stage.show();
         mainStage=stage;
     }
-
+    public static void openScene()
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("StronaGlowna.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 1280, 800);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        MainWindow.mainStage.setScene(scene);
+    }
     public static void main(String[] args) {
         launch();
     }

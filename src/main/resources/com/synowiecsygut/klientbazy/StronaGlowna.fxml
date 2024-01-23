@@ -47,6 +47,11 @@
                         <Font size="19.0" />
                      </font>
                   </Button>
+                  <Button layoutX="566.0" layoutY="190.0" onAction="#autorzyKsi" prefHeight="28.0" prefWidth="168.0" text="Autorzy Książek">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
                   <Button onAction="#wyd" prefHeight="28.0" prefWidth="168.0" text="Wydawnictwa">
                      <font>
                         <Font size="19.0" />
