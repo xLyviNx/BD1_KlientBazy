@@ -14,8 +14,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ksiazki
-{
+public class Ksiazki {
     @FXML
     TextField input_id;
     @FXML
@@ -48,9 +47,9 @@ public class Ksiazki
     @FXML
     private CheckBox checkBoxAutorzy;
     public static String zapisaneWydId = "";
+
     @FXML
-    private void initialize()
-    {
+    private void initialize() {
         close();
         checkBoxId.setSelected(true);
         checkBoxTytul.setSelected(true);
@@ -60,11 +59,12 @@ public class Ksiazki
         booktable.setOnMouseClicked(this::handleTableRowClick);
         input_idwyd.setText(zapisaneWydId);
     }
+
     @FXML
-    public void close()
-    {
+    public void close() {
         ksiazkiMain.setVisible(false);
     }
+
     @FXML
     void wys() {
         ksiazkiMain.setVisible(true);
@@ -142,7 +142,7 @@ public class Ksiazki
             return;
         }
         try {
-            int idWydawnictwo = idWydawnictwoStr.isEmpty()? 0 : Integer.parseInt(idWydawnictwoStr);
+            int idWydawnictwo = idWydawnictwoStr.isEmpty() ? 0 : Integer.parseInt(idWydawnictwoStr);
             try (DatabaseConnection db = new DatabaseConnection()) {
                 CallableStatement callableStatement = db.getConnection().prepareCall("{call DodajKsiazke(?, ?, ?)}");
                 callableStatement.setString(1, tytul);
@@ -243,8 +243,7 @@ public class Ksiazki
     }
 
     @FXML
-    void wroc()
-    {
+    void wroc() {
         FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("StronaGlowna.fxml"));
         Scene scene = null;
         try {
@@ -255,15 +254,14 @@ public class Ksiazki
         MainWindow.mainStage.setScene(scene);
     }
 
-    public void wypozyczZapisz(MouseEvent mouseEvent)
-    {
-        Egzemplarze.zapisKsiazka=input_id.getText();
+    public void wypozyczZapisz(MouseEvent mouseEvent) {
+        Egzemplarze.zapisKsiazka = input_id.getText();
     }
 
-    public void refresh(ActionEvent actionEvent)
-    {
+    public void refresh(ActionEvent actionEvent) {
         wys();
     }
+
     private void handleTableRowClick(MouseEvent event) {
         if (event.getClickCount() == 1) {
             Ksiazka selectedKsiazka = booktable.getSelectionModel().getSelectedItem();
@@ -274,9 +272,13 @@ public class Ksiazki
         }
     }
 
-    public void wyczyscWyd(MouseEvent mouseEvent)
-    {
-        zapisaneWydId="";
+    public void wyczyscWyd(MouseEvent mouseEvent) {
+        zapisaneWydId = "";
         input_idwyd.setText("");
+    }
+
+    @FXML
+    public void zapiszAutor(MouseEvent mouseEvent) {
+        AutorzyKsiazek.zapisaneIDKsiazki = input_id.getText();
     }
 }

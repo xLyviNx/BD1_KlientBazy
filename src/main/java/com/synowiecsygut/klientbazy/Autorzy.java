@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -255,5 +256,10 @@ public class Autorzy {
             throw new RuntimeException(e);
         }
         MainWindow.mainStage.setScene(scene);
+    }
+    @FXML
+    public void zapiszAutor(MouseEvent mouseEvent)
+    {
+        AutorzyKsiazek.zapisaneIDAutora=input_id.getText();
     }
 }

@@ -34,6 +34,9 @@ public class AutorzyKsiazek
     @FXML
     private TableColumn<AutorKsiazki, Integer> columnWaznosc;
 
+    public static String zapisaneIDKsiazki ="";
+    public static String zapisaneIDAutora ="";
+
 
     @FXML
     TableView<AutorKsiazki> auttable;
@@ -63,7 +66,7 @@ public class AutorzyKsiazek
         AutorKsiazki autor = auttable.getSelectionModel().getSelectedItem();
         if (autor != null) {
             input_idaut.setText(String.valueOf(autor.getIdAutora()));
-            input_idks.setText(String.valueOf(autor.getIdAutora()));
+            input_idks.setText(String.valueOf(autor.getIdKsiazki()));
             input_waznosc.setText(String.valueOf(autor.getWaznosc()));
             close();
         }
@@ -88,10 +91,10 @@ public class AutorzyKsiazek
                 callableStatement.setInt(1, idKsiazki);
                 callableStatement.setInt(2, idAutora);
                 callableStatement.setInt(3, waznosc);
-                callableStatement.registerOutParameter(8, Types.NUMERIC);
+                callableStatement.registerOutParameter(4, Types.NUMERIC);
                 callableStatement.execute();
 
-                int successFlag = callableStatement.getInt(8);
+                int successFlag = callableStatement.getInt(4);
                 if (successFlag == 1) {
                     Utilities.showAlert("Informacja", "Dodano autora książki.", Alert.AlertType.INFORMATION);
                     clearInputs();
@@ -120,28 +123,33 @@ public class AutorzyKsiazek
         String idksstr = input_idks.getText();
 
         if (idautstr.isEmpty() || idksstr.isEmpty()) {
-            Utilities.showAlert("Błąd", "Wszystkie dane (oprócz ważności) muszą być wypełnione!", Alert.AlertType.ERROR);
+            Utilities.showAlert("Błąd", "Wszystkie dane muszą być wypełnione!", Alert.AlertType.ERROR);
             return;
         }
 
         try {
             int idAutora = Integer.parseInt(idautstr);
             int idKsiazki = Integer.parseInt(idksstr);
-
             try (DatabaseConnection db = new DatabaseConnection()) {
-                CallableStatement callableStatement = db.getConnection().prepareCall("{call UsunAutoraKsiazki(?, ?)}");
+                CallableStatement callableStatement = db.getConnection().prepareCall("{call UsunAutoraKsiazki(?, ?, ?)}");
                 callableStatement.setInt(1, idKsiazki);
                 callableStatement.setInt(2, idAutora);
+                callableStatement.registerOutParameter(3, Types.NUMERIC);
                 callableStatement.execute();
 
-                Utilities.showAlert("Informacja", "Usunięto autora książki.", Alert.AlertType.INFORMATION);
-                clearInputs();
+                int successFlag = callableStatement.getInt(3);
+                if (successFlag == 1) {
+                    Utilities.showAlert("Informacja", "Usunięto autora książki.", Alert.AlertType.INFORMATION);
+                    clearInputs();
+                } else {
+                    Utilities.showAlert("Błąd!", "Nie udało się usunąć autora książki.", Alert.AlertType.ERROR);
+                }
             } catch (SQLException e) {
                 Utilities.showAlert("Błąd!", "Błąd bazy danych!\n" + e.getLocalizedMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
         } catch (NumberFormatException e) {
-            Utilities.showAlert("Błąd", "ID autora i książki muszą być liczbami!", Alert.AlertType.ERROR);
+            Utilities.showAlert("Błąd", "ID autora i ID książki muszą być liczbami!", Alert.AlertType.ERROR);
         }
     }
 
@@ -177,12 +185,19 @@ public class AutorzyKsiazek
         return aks;
     }
 
-    public void wyczyscZapis(MouseEvent mouseEvent) {
+    @FXML
+    public void wyczyscZapis()
+    {
+        zapisaneIDKsiazki="";
+        zapisaneIDAutora="";
+        clearInputs();
     }
+    @FXML
 
     public void wroc(MouseEvent mouseEvent) {
         MainWindow.openScene();
     }
+    @FXML
 
     public void close()
     {
