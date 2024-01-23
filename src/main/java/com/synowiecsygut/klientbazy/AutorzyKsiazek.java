@@ -45,6 +45,8 @@ public class AutorzyKsiazek
     void initialize()
     {
         ksAutorzyMain.setVisible(false);
+        input_idks.setText(zapisaneIDKsiazki);
+        input_idaut.setText(zapisaneIDAutora);
         initializeTable();
     }
     private void initializeTable() {

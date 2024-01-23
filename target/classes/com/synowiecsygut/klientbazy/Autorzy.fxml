@@ -63,6 +63,7 @@
                </children>
             </FlowPane>
             <Button mnemonicParsing="false" onMouseClicked="#wys" prefHeight="25.0" prefWidth="389.0" text="Wyświetl" />
+            <Button layoutX="456.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#zapiszAutor" prefHeight="25.0" prefWidth="320.0" text="Zapisz w celu dodania autora do książki" />
             <Button mnemonicParsing="false" onMouseClicked="#wroc" prefHeight="25.0" prefWidth="304.0" text="Wróć" />
             <VBox alignment="CENTER" spacing="5.0">
                <children>

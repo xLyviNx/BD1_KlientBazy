@@ -300,16 +300,8 @@ public class Wydawnictwa {
         return queryBuilder;
     }
     @FXML
-    void wroc()
-    {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("StronaGlowna.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 1280, 800);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        MainWindow.mainStage.setScene(scene);
+    void wroc() {
+        MainWindow.openScene();
     }
 
     public void refresh(ActionEvent actionEvent)
